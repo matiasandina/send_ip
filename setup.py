@@ -31,7 +31,7 @@ setup(
 		"PyYAML == 5.3.1",
 		"paramiko == 2.6.0"]
 		},
-	url="github address",
+	url="https://github.com/matiasandina/send_ip",
 	author="Matias Andina",
 	author_email="matiasandina@gmail.com"
 )
