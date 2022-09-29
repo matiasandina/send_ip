@@ -1,0 +1,6 @@
+user: target-user
+ip: ip-address
+pass: target-password
+port: target-port #default port is usually 22 
+remote-path: target-folder # this folder will be created under /home/user will create errors for other OS
+refresh-freq: 15 # minutes for cron-job
