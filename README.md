@@ -22,9 +22,16 @@ port: target-port #default port is usually 22
 remote-path: target-folder # this folder will be created under /home/user might create errors for not linux users
 refresh-freq: 15 # minutes for cron-job
 ```
-2. Run the main script from command line (`python3 send_ip.py`).
+2. Use the pacakge functions, for example:
 
-You can schedule this task to run automatically (see below)
+```
+from send_ip.send_ip import *
+
+info_file = create_info()
+send_info(info_file)
+```
+
+You can save this into a `send_ip_script.py` and schedule this task to run automatically (see below)
 
 ## Schedule task
 
