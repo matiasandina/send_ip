@@ -44,7 +44,7 @@ def create_info():
              'time': datetime.datetime.now().isoformat()}
 
     # do filename + _ + last 4 of mac address . yaml
-    info_file = f"{computer_name}_{mac.replace(':', '')[:4]}.yaml"
+    info_file = f"{computer_name}_{mac.replace(':', '')[-4:]}.yaml"
     with open(info_file, 'w') as outputfile:
         outputfile.write(yaml.dump(info))
     if hasattr(sys, 'ps1'):
@@ -55,6 +55,8 @@ def send_info(info_file):
     # Now connect and send the info
     with open("config.yaml", "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
+    with open(info_file, "r") as f:
+        info = yaml.load(f, Loader=yaml.FullLoader)
 
     ssh = createSSHClient(config["ip"], config["port"], config["user"], config["pass"])
     remote_path = posixpath.join('/home', config['user'], config['remote-path'])
@@ -71,11 +73,11 @@ def send_info(info_file):
     if temp['ip'] == info['ip']:
         os.remove("temp.yaml")
         if hasattr(sys, 'ps1'):
-            console.success("Transfer was successful", severe=T)
+            console.success("Transfer was successful", severe=True)
     else: 
         os.remove("temp.yaml")
         if hasattr(sys, 'ps1'):
-            console.error("Transfer was not successful", severe=T)
+            console.error("Transfer was not successful", severe=True)
 
 
     # TODO: add logging ?
