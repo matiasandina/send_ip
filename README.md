@@ -4,10 +4,10 @@ Python software to configure machines for sending their IP through ssh.
 
 ## Installation
 
-Run the following to instal:
+Run the following to install:
 
 ```python
-pip install send_ip
+pip3 install send_ip
 ```
 
 ## Usage
