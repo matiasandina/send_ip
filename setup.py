@@ -6,7 +6,7 @@ with open("README.md", "r") as readme:
 
 setup(
 	name = "send_ip",
-	version="0.0.2",
+	version="0.0.3",
 	description="python package to send its own IP to another machine through ssh",
 	py_modules=["send_ip.py"],
 	package_dir={'' : 'src'},
@@ -23,7 +23,7 @@ setup(
 	install_requires= [
 		"PyYAML >= 5.3.1",
 		"paramiko >= 2.6.0",
-		"crontrab"
+		"crontrab >= 0.23.0"
 	],
 	extras_require={
 		"dev" : [
