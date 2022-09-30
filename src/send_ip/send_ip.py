@@ -10,6 +10,7 @@ import socket
 from py_console import console
 import sys 
 
+# In Ubuntu, you can setup this using crontabs
 # In windows, there's no crontab
 # check how to configure scheduler here
 # https://www.askpython.com/python/examples/execute-python-windows-task-scheduler
