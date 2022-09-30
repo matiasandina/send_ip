@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 with open("README.md", "r") as readme:
@@ -6,10 +6,11 @@ with open("README.md", "r") as readme:
 
 setup(
 	name = "send_ip",
-	version="0.0.3",
+	version="0.0.4",
 	description="python package to send its own IP to another machine through ssh",
-	py_modules=["send_ip.py"],
 	package_dir={'' : 'src'},
+	packages = find_packages("src"),
+	#py_modules=["send_ip.py"],
 	classifiers=[
 		"Programming Language :: Python :: 3",
 		"Programming Language :: Python :: 3.7",
@@ -23,7 +24,7 @@ setup(
 	install_requires= [
 		"PyYAML >= 5.3.1",
 		"paramiko >= 2.6.0",
-		"crontrab >= 0.23.0"
+		#"crontrab >= 0.23.0"
 	],
 	extras_require={
 		"dev" : [
