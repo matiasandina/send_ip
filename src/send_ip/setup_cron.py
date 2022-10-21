@@ -1,15 +1,18 @@
 from crontab import CronTab
 import yaml
 import getpass
+import os
 
-def setup_cron():
+def setup_cron(script_path, minutes):
+    assert isinstance(minutes, int), f"Provide minutes as an integer. {minutes} was provided"
+    assert os.path.exists(script_path), f"File does not exist. {script_path} was provided"
+    assert script_path.endswith("py"), f"File does not seem to be a python script. {script_path}"
     # Read info
     with open("config.yaml", "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
-    # this is what we want to run
-    #cmd_command = "bash ~/homecage_quantification/send_ip.sh"
-    # TODO: it should run python3 send_ip.py
+    # This is what we want to run
+    cmd_command = f"python3 {script_path}"
 
     job_comment = f"send ip to {config['user']}"
 
@@ -23,8 +26,8 @@ def setup_cron():
     if job_exists:
         for job in cron:
             if job.comment == job_comment:
-                print("job named: " + job_comment + " already exists, scheduling 1 minute")
-                job.minute.every(1)
+                print(f"job named: {job_comment} already exists, scheduling every {minutes} minute")
+                job.minute.every(minutes)
                 # write the program
                 cron.write()
     else:
@@ -32,7 +35,7 @@ def setup_cron():
         # create a new job
         job = cron.new(command = cmd_command, comment=job_comment)
         # schedule it every minute
-        job.minute.every(1)
+        job.minute.every(minutes)
         # write the program
         cron.write()
 

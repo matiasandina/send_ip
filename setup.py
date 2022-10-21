@@ -24,7 +24,7 @@ setup(
 	install_requires= [
 		"PyYAML >= 5.3.1",
 		"paramiko >= 2.6.0",
-		#"crontrab >= 0.23.0"
+		"python-crontab >= 0.23.0",
 		"py_console",
 		"scp"
 	],
