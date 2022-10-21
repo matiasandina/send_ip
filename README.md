@@ -49,3 +49,40 @@ To install `send_ip` and tools needed for tests, you can install into a virtuale
 ```bash
 pip install -e .[dev]
 ```
+## Known issues
+
+For a Raspberry pi installation, you might face this issue:
+
+```
+          =============================DEBUG ASSISTANCE=============================
+          If you are seeing a compilation error please try the following steps to
+          successfully install bcrypt:
+          1) Upgrade to the latest pip and try again. This will fix errors for most
+             users. See: https://pip.pypa.io/en/stable/installing/#upgrading-pip
+          2) Ensure you have a recent Rust toolchain installed. bcrypt requires
+             rustc >= 1.56.0.
+      
+          Python: 3.9.2
+          platform: Linux-5.15.56-v7l+-armv7l-with-glibc2.31
+          pip: n/a
+          setuptools: 65.5.0
+          setuptools_rust: 1.5.2
+          rustc: n/a
+          =============================DEBUG ASSISTANCE=============================
+      
+
+```
+
+You might need:
+
+```
+sudo apt-get install build-essential cargo
+```
+
+You can also refer to this info in [bcrypt](https://pypi.org/project/bcrypt/).
+
+You might also need to install or upgrade `rustc`
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
