@@ -12,7 +12,7 @@ def setup_cron(script_path, minutes):
         config = yaml.load(f, Loader=yaml.FullLoader)
 
     # This is what we want to run
-    cmd_command = f"python3 {script_path}"
+    cmd_command = f"cd {os.path.dirname(script_path)} && python3 {script_path}"
 
     job_comment = f"send ip to {config['user']}"
 

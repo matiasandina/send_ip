@@ -35,7 +35,19 @@ You can save this into a `send_ip_script.py` and schedule this task to run autom
 
 ## Schedule task
 
-### Chron
+### Cron
+
+You can setup `send_ip_script.py` to run on a schedule (e.g., every 15 minutes). For example, this is the configuration for a raspberry pi (`pi`) sending its IP to another machine (`matias`) using `config.yaml`.
+
+```
+from send_ip.setup_cron import setup_cron
+setup_cron("/home/pi/send_ip/send_ip_script.py",15)
+Current cron tab (same as $ crontab -l)
+--------------------------------------
+
+*/15 * * * * cd python3 /home/pi/send_ip/ && /home/pi/send_ip/send_ip_script.py # send ip to matias
+
+```
 
 
 ### Windows machines
