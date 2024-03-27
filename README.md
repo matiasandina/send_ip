@@ -7,8 +7,8 @@ Python software to configure machines for sending their IP through ssh.
 You are advised to create a virtual environment for this program:
 
 ```
-conda create -n "send_ip_env" 
-conda activate send_ip_end
+conda create -n "send_ip_env" python=3.10 pip=23.0.1
+conda activate send_ip_env
 ```
 
 Run the following to install:
@@ -21,7 +21,16 @@ Running from a virtual environment will affect the python path that you supply t
 
 ## Usage
 
-1. Edit the `config.yaml` file to match your destination. These fields will be used to `scp` into the target machine (`user@ip:port` using password `pass` to login).
+1. Make a `/send_ip` folder in your home directory and create a `config.yaml`
+
+```
+mkdir send_ip
+cd send_ip
+touch config.yaml # also nano config.yaml if you are familiar
+```
+
+2. Edit the `config.yaml` file to match your destination. These fields will be used to `scp` into the target machine (`user@ip:port` using password `pass` to login).
+
 
 ```yaml
 user: target-user
@@ -31,9 +40,13 @@ port: target-port #default port is usually 22
 remote-path: target-folder # this folder will be created under /home/user might create errors for not linux users
 refresh-freq: 15 # minutes for cron-job
 python_path: /path/to/virtualenv/bin/python3 # the python path you supply here will affect where the code runs (e.g., /usr/bin/python3), see docs! 
-
 ```
-2. Use the pacakge functions, for example:
+
+> [!TIP]
+> If you are unsure about your python path. Activate your virtual environment and `which python`.
+
+
+3. You can use this 'natively' in python. To use the pacakge functions, for example:
 
 ```
 from send_ip.send_ip import *
@@ -48,15 +61,15 @@ You can save this into a `send_ip_script.py` and schedule this task to run autom
 
 ### Cron
 
-You can setup `send_ip_script.py` to run on a schedule (e.g., every 15 minutes). For example, this is the configuration for a raspberry pi (`pi`) sending its IP to another machine (`matias`) using `config.yaml`.
+You can setup `send_ip_script.py` to run on a schedule (e.g., every 60 minutes). For example, this is the configuration for a raspberry pi (`pi`) sending its IP to another machine (`matias`) using `config.yaml`.
 
 ```
 from send_ip.setup_cron import setup_cron
-setup_cron("/home/pi/send_ip/send_ip_script.py",15)
+setup_cron("/home/pi/send_ip/send_ip_script.py",60)
 Current cron tab (same as $ crontab -l)
 --------------------------------------
 
-*/15 * * * * cd python3 /home/pi/send_ip/ && /home/pi/send_ip/send_ip_script.py # send ip to matias
+*/60 * * * * cd python3 /home/pi/send_ip/ && /home/pi/send_ip/send_ip_script.py # send ip to matias
 
 ```
 
