@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "send_ip"
+version = "0.0.9"
+description = "python package to send its own IP to another machine through ssh"
+authors = [{ name = "Matias Andina", email = "matiasandina@gmail.com" }]
+license = {text = "MIT License"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+readme = "README.md"
+dependencies = [
+    "PyYAML >= 5.3.1",
+    "paramiko >= 2.6.0",
+    "python-crontab >= 0.23.0",
+    "py_console",
+    "scp"
+]
+
+[project.urls]
+Homepage = "https://github.com/matiasandina/send_ip"
+
+[project.optional-dependencies]
+dev = [
+    "twine",
+    "check-manifest",
+    "PyYAML==5.3.1",
+    "paramiko==2.6.0"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
