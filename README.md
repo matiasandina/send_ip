@@ -4,11 +4,20 @@ Python software to configure machines for sending their IP through ssh.
 
 ## Installation
 
+You are advised to create a virtual environment for this program:
+
+```
+conda create -n "send_ip_env" 
+conda activate send_ip_end
+```
+
 Run the following to install:
 
 ```python
 pip3 install send_ip
 ```
+
+Running from a virtual environment will affect the python path that you supply to `config.yaml`. See information in [Usage](#usage) section.
 
 ## Usage
 
@@ -21,6 +30,8 @@ pass: target-password
 port: target-port #default port is usually 22 
 remote-path: target-folder # this folder will be created under /home/user might create errors for not linux users
 refresh-freq: 15 # minutes for cron-job
+python_path: /path/to/virtualenv/bin/python3 # the python path you supply here will affect where the code runs (e.g., /usr/bin/python3), see docs! 
+
 ```
 2. Use the pacakge functions, for example:
 
@@ -98,3 +109,5 @@ You might also need to install or upgrade `rustc`
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+
+**Don't forget to restart your shell after installation of rust!!**
