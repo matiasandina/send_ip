@@ -3,16 +3,42 @@ import yaml
 import getpass
 import os
 
-def setup_cron(script_path, minutes):
-    assert isinstance(minutes, int), f"Provide minutes as an integer. {minutes} was provided"
+def setup_cron(script_path, minutes=None):
     assert os.path.exists(script_path), f"File does not exist. {script_path} was provided"
     assert script_path.endswith("py"), f"File does not seem to be a python script. {script_path}"
     # Read info
     with open("config.yaml", "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
+    
+    if minutes is None:
+        minutes = config.get('refresh-freq')
+        if minutes is None:
+            print("Error: 'refresh-freq' not specified in config.yaml.")
+            return
+    
+    # Ensure minutes is a positive integer
+    try:
+        minutes = int(minutes)
+        if minutes <= 0:
+            raise ValueError
+    except ValueError:
+        print(f"Error: 'minutes' must be a positive integer. {minutes} was provided.")
+        return
 
-    # This is what we want to run
-    cmd_command = f"cd {os.path.dirname(script_path)} && python3 {script_path}"
+    # Extract the Python path from config, fallback to 'python3' if not specified
+    python_path = config.get('python_path', 'python3')
+
+    # Warn if using the default python path
+    if python_path == 'python3':
+        print("Warning: Using default 'python3' path. Ensure this is intended.")
+
+    # Check if the specified python path exists
+    if not os.path.exists(python_path):
+        print(f"Error: The specified python path does not exist: {python_path}")
+        return
+    
+    # Build the command to run, incorporating the specified Python interpreter
+    cmd_command = f"cd {os.path.dirname(script_path)} && {python_path} {script_path}"
 
     job_comment = f"send ip to {config['user']}"
 
@@ -44,4 +70,5 @@ def setup_cron(script_path, minutes):
     print(cron)
 
 if __name__ == '__main__':
-    setup_cron()
+    print("Calling from command line is not supported yet")
+    pass
