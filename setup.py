@@ -6,7 +6,7 @@ with open("README.md", "r") as readme:
 
 setup(
 	name = "send_ip",
-	version="0.0.8",
+	version="0.0.10",
 	description="python package to send its own IP to another machine through ssh",
 	package_dir={'' : 'src'},
 	packages = find_packages("src"),
