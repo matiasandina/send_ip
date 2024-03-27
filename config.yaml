@@ -4,3 +4,5 @@ pass: target-password
 port: target-port #default port is usually 22 
 remote-path: target-folder # this folder will be created under /home/user will create errors for other OS
 refresh-freq: 15 # minutes for cron-job
+python_path: /path/to/virtualenv/bin/python3 # the python path you supply here will affect where the code runs (e.g., /usr/bin/python3), see docs! 
+
